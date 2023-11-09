@@ -1,3 +1,3 @@
 # cdt-1d-cnn-financial-prediction
 
-This article and code is about the article named [Financial Markets Prediction with Deep Learning](https://arxiv.org/abs/2104.05413)
+I was reading an article which applies a CNN (Convolutional Neural Network) to financial data and the authors claim the resulting strategy have very consistent profitability. You can read the article here: [Financial Markets Prediction with Deep Learning](https://arxiv.org/abs/2104.05413) This sparked my interest so I've decided to replicate their results. I couldn't find the code for this model anywhere on the internet so I wrote it myself. I wrote to the authors about the code but nobody has yet go back to me.
