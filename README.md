@@ -6,6 +6,6 @@ I was reading an article which applies a CNN (Convolutional Neural Network) to f
 
 The authors claim that applying their CNN model to Crude Oil futures yielded a 500% return over 71 months. This is approximately equal to a 43% CAGR (Compound Annual Growth Rate). The strategy was profitable during 60 months of the 71 months. Below is a plot from the article.
 
-![Strategy Performance for Crude Oil Futures](\assets\strategy_performance.png)
+![Strategy Performance for Crude Oil Futures](/assets/strategy_performance.png)
 
 
