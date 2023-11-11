@@ -18,6 +18,8 @@ If you need to brush up on your neural networks knowledge and convolutions know 
 
 ![Data Structure and CNN Architecture](/assets/feature_space_and_model_architecture.png)
 
+A^2
+
 
 
 
