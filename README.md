@@ -18,7 +18,7 @@ If you need to brush up on your neural networks knowledge and convolutions know 
 
 ![Data Structure and CNN Architecture](/assets/feature_space_and_model_architecture.png)
 
-A^2
+This first rectangular of the above figure describes the feature matrix before the application of any convolutions. Along the x-axis you have different lagged values for various data types. For example o<sub>1</sub> is the opening price for the 5 minute bar in that particular observation, o<sub>2</sub> is the opening price for the previous 5 minute bar etc. Along the y-axis of the feature matrix, we have various candle data types are lined up. These are open price, high price, low price, close price and volume.
 
 
 
