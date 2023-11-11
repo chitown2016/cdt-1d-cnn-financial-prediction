@@ -18,7 +18,54 @@ If you need to brush up on your neural networks knowledge and convolutions know 
 
 ![Data Structure and CNN Architecture](/assets/feature_space_and_model_architecture.png)
 
-This first rectangular of the above figure describes the feature matrix before the application of any convolutions. Along the x-axis you have different lagged values for various data types. For example o<sub>1</sub> is the opening price for the 5 minute bar in that particular observation, o<sub>2</sub> is the opening price for the previous 5 minute bar etc. Along the y-axis of the feature matrix, we have various candle data types are lined up. These are open price, high price, low price, close price and volume.
+This first rectangular of the above figure describes the feature matrix before the application of any convolutions. Along the x-axis you have different lagged values for various data types. For example o<sub>1</sub> is the opening price for the 5 minute bar in that particular observation, o<sub>2</sub> is the opening price for the previous 5 minute bar etc. Along the y-axis of the feature matrix, we have various candle data types are lined up. These are open price, high price, low price, close price and volume. Each consecutive 5 minute data is organized to form a 5X24 feature matrix.
+
+The 1-D kernels (the red and blue one) scan along the x-axis while each one of them goes to every position of feature matrix by a stride of one. The C' and C" represents the output channels of the red and blue kernel, respectively. Because of padding, the convolutional output channels have the same dimension as the input matrix. A max-pooling layer follows a convolutional layer, and max-pooling layers condense the dimensions of the x-axis. The M<sup>*</sup> and M<sup>**</sup> represent the output channels of the max-pooling operations (the orange and green one) by a stride of three.
+
+The tensorflow code for the full model is below:
+
+```
+conv2d_strides = 1
+kernel_regularizer = 1e-5
+adam_initial_learning_rate = 1e-3
+dropout_rate = 0.3
+model = Sequential()
+
+conv2d_layer1 = Conv2D(32, (1,4), strides = conv2d_strides,
+                       kernel_regularizer=regularizers.l2(kernel_regularizer),
+                       padding='same', activation='relu', use_bias=True,
+                       kernel_initializer='glorot_uniform',
+                       input_shape=(5,24,1))
+
+
+model.add(conv2d_layer1)
+model.add(MaxPool2D(pool_size=(1,4), strides=(1,4), padding='valid'))
+
+conv2d_layer2 = Conv2D(64, (1, 3), strides=conv2d_strides,
+                       kernel_regularizer=regularizers.l2(kernel_regularizer),
+                       padding='same', activation='relu', use_bias=True,
+                       kernel_initializer='glorot_uniform')
+
+model.add(conv2d_layer2)
+model.add(MaxPool2D(pool_size=(1, 3), strides=(1,3), padding='valid'))
+
+conv2d_layer3 = Conv2D(128, (1, 2), strides=conv2d_strides,
+                       kernel_regularizer=regularizers.l2(kernel_regularizer),
+                       padding='same', activation='relu', use_bias=True,
+                       kernel_initializer='glorot_uniform')
+
+model.add(conv2d_layer3)
+model.add(MaxPool2D(pool_size=(1, 2), strides=(1, 2), padding='valid'))
+
+model.add(Flatten())
+model.add(Dense(1000, activation='relu'))
+model.add(Dense(500, activation='relu'))
+model.add(Dropout(dropout_rate))
+model.add(Dense(3, activation='softmax'))
+
+optimizer = optimizers.Adam(learning_rate=adam_initial_learning_rate)
+model.compile(loss='categorical_crossentropy', optimizer=optimizer)
+```
 
 
 
