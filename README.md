@@ -75,19 +75,33 @@ Convolutional layers are followed by two fully connected layers with 1000 and 50
 
 Dealing with futures data is a little more complicated than stock data in general. Especially when calculating returns just using a rolling contract data will lead to wrong results because of price jumps during the contract rolls. To avoid this I've used expired contract data to calculate features and label and then stitched the data together based on which contract is more liquid on a given date.
 
-For the prepare_data.py function to work you will need 5M data already stored in your hard-drive and you will need a function to return it for a given ticker. For example:
+For the prepare_data.py function to work you will need 5M data already stored in your hard-drive and you will need a function to return it as a pandas dataframe for a given ticker. For example:
 
 ```
-data_out_5M = id.get_presaved_data(ticker=ticker_i, interval='5M')
+data_out_5M = id.get_presaved_data(ticker='CLZ2015', interval='5M')
 print(data_out_5M.head())
 ```
 
 Should return:
 
+![](/assets/5M_data_example.JPG)
 
+Now we can calculate the necessary features to build the feature matrix. First we lag the necessary fields from 1 to 23th lag and save them as columns of the dataframe.
 
+```
+for i in range(1, 24):
+          data_out_5M[['open_' + str(i),'high_' + str(i),'low_' + str(i),'close_' + str(i),'volume_' + str(i)]] = \
+          data_out_5M[['open','high','low','close','volume']].shift(i)
+```
+The authors mention they run the model prediction only every 2 hours so we resample 5M data into 2H using pandas functionality. We also calculate the return of the past 2 hours and futures 2 hours and store them in fields 'percent_diff'  and 'percent_diff1' respcetively.
 
-
+```
+data_2H = data_out_5M.resample('2H').last()
+data_2H.dropna(subset='close', inplace=True)
+data_2H['percent_diff'] = data_2H['close'].diff()/data_2H['close'].shift(1)
+data_2H['std'] = data_2H['percent_diff'].rolling(10).std()
+data_2H['percent_diff1'] = data_2H['percent_diff'].shift(-1)
+```
 
 
 
