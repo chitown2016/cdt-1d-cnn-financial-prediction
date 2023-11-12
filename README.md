@@ -22,7 +22,7 @@ This first rectangular of the above figure describes the feature matrix before t
 
 The 1-D kernels (the red and blue one) scan along the x-axis while each one of them goes to every position of feature matrix by a stride of one. The C' and C" represents the output channels of the red and blue kernel, respectively. Because of padding, the convolutional output channels have the same dimension as the input matrix. A max-pooling layer follows a convolutional layer, and max-pooling layers condense the dimensions of the x-axis. The M<sup>*</sup> and M<sup>**</sup> represent the output channels of the max-pooling operations (the orange and green one) by a stride of three.
 
-The tensorflow code for the full model is below:
+The desired effect of kernels sliding along x-axis can be achieved using Conv2D in combination with kernels with height 1. The tensorflow code for the full model is below:
 
 ```
 conv2d_strides = 1
@@ -66,6 +66,9 @@ model.add(Dense(3, activation='softmax'))
 optimizer = optimizers.Adam(learning_rate=adam_initial_learning_rate)
 model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 ```
+There are three convolutional layers and the number of output layers for each are 32, 64 and 128. As a result of 3 max-pooling operations the x-axis shrink from 24 to 1.
+Convolutional layers are followed by two fully connected layers with 1000 and 500 units and an output softmax layer. Model summary is as follows:
+
 
 
 
