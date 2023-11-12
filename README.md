@@ -69,6 +69,8 @@ model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 There are three convolutional layers and the number of output layers for each are 32, 64 and 128. As a result of 3 max-pooling operations the x-axis shrink from 24 to 1.
 Convolutional layers are followed by two fully connected layers with 1000 and 500 units and an output softmax layer. Model summary is as follows:
 
+![Model Summary](/assets/model_summary.jpg)
+
 
 
 
