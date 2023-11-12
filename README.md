@@ -69,7 +69,22 @@ model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 There are three convolutional layers and the number of output layers for each are 32, 64 and 128. As a result of 3 max-pooling operations the x-axis shrink from 24 to 1.
 Convolutional layers are followed by two fully connected layers with 1000 and 500 units and an output softmax layer. Model summary is as follows:
 
-![Model Summary](/assets/model_summary.jpg)
+![Model Summary](/assets/model_summary.JPG)
+
+## Data Processing
+
+Dealing with futures data is a little more complicated than stock data in general. Especially when calculating returns just using a rolling contract data will lead to wrong results because of price jumps during the contract rolls. To avoid this I've used expired contract data to calculate features and label and then stitched the data together based on which contract is more liquid on a given date.
+
+For the prepare_data.py function to work you will need 5M data already stored in your hard-drive and you will need a function to return it for a given ticker. For example:
+
+```
+data_out_5M = id.get_presaved_data(ticker=ticker_i, interval='5M')
+print(data_out_5M.head())
+```
+
+Should return:
+
+
 
 
 
