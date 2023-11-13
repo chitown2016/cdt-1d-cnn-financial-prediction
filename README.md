@@ -145,8 +145,14 @@ final_data = prep.prepare_2H_data()
 feature_data = prep.get_features(df=final_data)
 with pd.option_context('display.width', 150,'display.max_seq_items', None):
     print(feature_data.columns)
+```
+This will yield the following list:
 
 ![](/assets/feature_list.JPG)
+
+As you can see we have all the necessary columns in feature_data. However we will need to reshape it to form a 2 dimensional matrix for each observation. At the moment each observation is a 1 dimensional vector.
+
+The authors use a rolling window methodology to train and test the model. Training is done with 2 years of data. The next 4 weeks of data is used for validation,
 
 
 
