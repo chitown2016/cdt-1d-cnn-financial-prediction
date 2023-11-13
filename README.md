@@ -146,7 +146,7 @@ feature_data = prep.get_features(df=final_data)
 with pd.option_context('display.width', 150,'display.max_seq_items', None):
     print(feature_data.columns)
 
-
+![](/assets/feature_list.JPG)
 
 
 
