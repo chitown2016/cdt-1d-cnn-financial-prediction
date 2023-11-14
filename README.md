@@ -73,6 +73,8 @@ Convolutional layers are followed by two fully connected layers with 1000 and 50
 
 ## Data Processing
 
+### Collecting Features
+
 Dealing with futures data is a little more complicated than stock data in general. Especially when calculating returns just using a rolling contract data will lead to wrong results because of price jumps during the contract rolls. To avoid this I've used expired contract data to calculate features and label and then stitched the data together based on which contract is more liquid on a given date. All the code related to data processing can be found in prepare_data.py.
 
 For the prepare_data.py function to work you will need 5M data already stored in your hard-drive and you will need a function to return it as a pandas dataframe for a given ticker. For example:
@@ -93,6 +95,8 @@ for i in range(1, 24):
           data_out_5M[['open_' + str(i),'high_' + str(i),'low_' + str(i),'close_' + str(i),'volume_' + str(i)]] = \
           data_out_5M[['open','high','low','close','volume']].shift(i)
 ```
+### Resampling Data and Calculating The Labels
+
 The authors mention they run the model prediction only every 2 hours so we resample 5M data into 2H using pandas functionality. We also calculate the return of the past 2 hours and futures 2 hours and store them in fields 'percent_diff'  and 'percent_diff1' respcetively. We also calculate the rolling standard deviation using the past 10 observations. This will be used in calculating the label.
 
 ```
@@ -152,6 +156,8 @@ This will yield the following list:
 
 As you can see we have all the necessary columns in feature_data. However we will need to reshape it to form a 2 dimensional matrix for each observation. At the moment each observation is a 1 dimensional vector.
 
+### Calculating Indices for Rolling Window Training
+
 The authors use a rolling window methodology to train and test the model. Training is done with 2 years of data. The next 4 weeks of data is used for validation and the following 2 weeks are used for testing the strategy. After the results are collected the starting point of each window is moved by 2 weeks after which model estimation and testing restarts again using this new data. The following function in prepare_data.py will generate the necessary indices to access the training, validation and test data for each iteration of the rolling training.
 
 ```
@@ -193,6 +199,73 @@ print('next test_end_index: ' + str(test_end_index_list[i+1]))
 ```
 
 ![](/assets/example_rolling_indices.JPG)
+
+For each training iteration we have train_end_index-train_start_index = 6240 observations. We have approximately 60 (5*12) 2 hour candles in a week. So each training window has 6240/60=104 weeks of data which is equivalent to two years of data as authors prescribe. Test windows came after training windows and they each have test_end_index-test_start_index=120 observations equivalent to 2 weeks of data. Also all the data indices move by 120 from iteration 55 to iteration 56 as prescribed in the article.
+
+### Reshaping the Feature Data into Feature Matrix
+
+As we have discussed we still have each observation as a 1 dimensional vector and we need to reshape this 1x120 vector into 5x24 matrix. The below function in prepare_data.py accomplishes this:
+
+```
+def reshape_data(data_input):
+
+    return np.reshape(data_input, (data_input.shape[0], 5, 24))
+```
+
+Let's see the above function in action to make sure it does what it's supposed to do:
+
+```
+# prep.reshape_data is correctly transofrming data into (num_obs,5,24) shaped matrix
+
+import prepare_data as prep
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+final_data = prep.prepare_2H_data()
+feature_data = prep.get_features(df=final_data)
+rolling_indices_output = prep.prepare_rolling_simulation_indices(entire_data=final_data)
+
+train_start_index_list = rolling_indices_output['train_start_index_list']
+train_end_index_list = rolling_indices_output['train_end_index_list']
+
+test_start_index_list = rolling_indices_output['test_start_index_list']
+test_end_index_list = rolling_indices_output['test_end_index_list']
+
+i = 50
+
+train_start_index = train_start_index_list[i]
+train_end_index = train_end_index_list[i]
+
+test_start_index = test_start_index_list[i]
+test_end_index = test_end_index_list[i]
+
+x_train_i = feature_data.iloc[train_start_index:train_end_index, :]
+y_train_i = np.array(final_data['label'].iloc[train_start_index:train_end_index])
+
+x_test_i = feature_data.iloc[test_start_index:test_end_index, :]
+y_test_i = final_data['label'].iloc[test_start_index:test_end_index]
+
+scaler_i = StandardScaler()
+x_train_i_t = scaler_i.fit_transform(x_train_i)
+x_test_i_t = scaler_i.transform(x_test_i)
+
+x_train_reshaped = prep.reshape_data(x_train_i_t)
+x_test_reshaped = prep.reshape_data(x_test_i_t)
+
+print(x_train_i_t[100])
+print(x_train_reshaped[100])
+print(x_train_reshaped.shape)
+```
+The above script returns the following:
+
+
+
+
+
+
+
+
+
 
 
 
