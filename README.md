@@ -152,7 +152,7 @@ This will yield the following list:
 
 As you can see we have all the necessary columns in feature_data. However we will need to reshape it to form a 2 dimensional matrix for each observation. At the moment each observation is a 1 dimensional vector.
 
-The authors use a rolling window methodology to train and test the model. Training is done with 2 years of data. The next 4 weeks of data is used for validation and the following 2 weeks are used for testing the strategy. After the results are collected the starting point of each window is moved by 2 weeks are model estimation and testing restarts again using this new data. The following function in prepare_data.py will generate the necessary indices to access the training, validation and test data for each iteration of the rolling training.
+The authors use a rolling window methodology to train and test the model. Training is done with 2 years of data. The next 4 weeks of data is used for validation and the following 2 weeks are used for testing the strategy. After the results are collected the starting point of each window is moved by 2 weeks after which model estimation and testing restarts again using this new data. The following function in prepare_data.py will generate the necessary indices to access the training, validation and test data for each iteration of the rolling training.
 
 ```
 def prepare_rolling_simulation_indices(**kwargs):
@@ -176,6 +176,24 @@ def prepare_rolling_simulation_indices(**kwargs):
             'validation_start_index_list': validation_start_index, 'validation_end_index_list': validation_end_index,
             'test_start_index_list': test_start_index, 'test_end_index_list': test_end_index}
 ```
+
+Let's take a look at the output of this function by printing out the 55th and 56th values of the returned lists.
+
+```
+i = 55
+print('example case:')
+print('train_start_index: ' + str(train_start_index_list[i]))
+print('train_end_index: ' + str(train_end_index_list[i]))
+print('test_start_index: ' + str(test_start_index_list[i]))
+print('test_end_index: ' + str(test_end_index_list[i]))
+print('next train_start_index: ' + str(train_start_index_list[i+1]))
+print('next train_end_index: ' + str(train_end_index_list[i+1]))
+print('next test_start_index: ' + str(test_start_index_list[i+1]))
+print('next test_end_index: ' + str(test_end_index_list[i+1]))
+```
+
+
+
 
 
 
