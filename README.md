@@ -258,7 +258,7 @@ print(x_train_reshaped.shape)
 ```
 The above script returns the following:
 
-
+![](/assets/reshape_output.JPG)
 
 
 
