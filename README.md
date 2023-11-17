@@ -262,6 +262,10 @@ The above script returns the following:
 
 We have used the 100<sup>th</sup> observation of the 50<sup>th</sup> training iteration as an example. The 100<sup>th</sup> observation of x_train_i_t is a 1x120 vector as expected. And we can see the first row of the 100<sup>th</sup> observation of x_train_reshaped is equal to the first 24 elements of the 100<sup>th</sup> observation of x_train_i_t. Also we print the dimensiont of x_train_reshaped which shows that it's comprised of 6240 observations of 5x24 matrices.
 
+## Training with a GPU in Windows
+
+I have found that the easiest way to train a tensorflow model in windows is to use a docker image. And if you are using visual studio code, one of the most convenient ways to have access to your python library while running a container is to use [Dev Containers Extension](https://code.visualstudio.com/docs/devcontainers/containers) of Visual Studio Code. First you will need to figure out which python libraries and files you will need to run during the training. Then inside the folder that contains all your python files, create a .devcontainer folder. Inside this folder you will need devcontainer.json, Dockerfile and a requirements.txt file. You can find copies of the files Ive used in the repository. After this you will be able to open your folder in a docker container from within your Visual Studio Code with access to your GPU.
+
 
 
 
