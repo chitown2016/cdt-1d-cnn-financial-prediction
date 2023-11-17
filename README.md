@@ -260,7 +260,7 @@ The above script returns the following:
 
 ![](/assets/reshape_output.JPG)
 
-We have used to 100<sup>th</sup> observation as an example. The 100<sup>th</sup> observation of x_train_i_t is a 1x120 vector as expected. And we can see the first row of the 100<sup>th</sup> observation of x_train_reshaped is equal to the first 24 elements of the 100<sup>th</sup> observation of x_train_i_t. Also we print the dimensiont of x_train_reshaped which shows that it's comprised of 6240 observations of 5x24 matrices.
+We have used the 100<sup>th</sup> observation of the 50<sup>th</sup> training iteration as an example. The 100<sup>th</sup> observation of x_train_i_t is a 1x120 vector as expected. And we can see the first row of the 100<sup>th</sup> observation of x_train_reshaped is equal to the first 24 elements of the 100<sup>th</sup> observation of x_train_i_t. Also we print the dimensiont of x_train_reshaped which shows that it's comprised of 6240 observations of 5x24 matrices.
 
 
 
