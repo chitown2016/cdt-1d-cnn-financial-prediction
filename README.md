@@ -79,7 +79,7 @@ Dealing with futures data is a little more complicated than stock data in genera
 
 For the prepare_data.py function to work you will need 5M data already stored in your hard-drive and you will need a function to return it as a pandas dataframe for a given ticker. For example:
 
-```
+```python
 data_out_5M = id.get_presaved_data(ticker='CLZ2015', interval='5M')
 print(data_out_5M.head())
 ```
@@ -90,7 +90,7 @@ Should return:
 
 Now we can calculate the necessary features to build the feature matrix. Let's take a look prepare_2H_data() function. First we lag the necessary fields from 1 to 23th lag and save them as columns of the dataframe.
 
-```
+```python
 for i in range(1, 24):
           data_out_5M[['open_' + str(i),'high_' + str(i),'low_' + str(i),'close_' + str(i),'volume_' + str(i)]] = \
           data_out_5M[['open','high','low','close','volume']].shift(i)
@@ -99,7 +99,7 @@ for i in range(1, 24):
 
 The authors mention they run the model prediction only every 2 hours so we resample 5M data into 2H using pandas functionality. We also calculate the return of the past 2 hours and futures 2 hours and store them in fields 'percent_diff'  and 'percent_diff1' respcetively. We also calculate the rolling standard deviation using the past 10 observations. This will be used in calculating the label.
 
-```
+```python
 data_2H = data_out_5M.resample('2H').last()
 data_2H.dropna(subset='close', inplace=True)
 data_2H['percent_diff'] = data_2H['close'].diff()/data_2H['close'].shift(1)
@@ -108,7 +108,7 @@ data_2H['percent_diff1'] = data_2H['percent_diff'].shift(-1)
 ```
 We do the above prodecure for each individual expiry and below we combine this data and drop the duplicates as we only want one observation for each datetime. We calculate the label using the future 2H return and past standard deviation. Label will be 1 for returns higher than a threshold level and 0 for returns lower than a threshold level and 1 for the rest of the observations.
 
-```
+```python
 data_list.append(data_2H)
 
 raw_data = pd.concat(data_list)
@@ -127,7 +127,7 @@ raw_data.to_pickle('cnn_data.pkl')
 
 get_features() function in prepare_data.py helps us extract the features from the raw_data. Below is the implementation.
 
-```
+```python
 def get_features(**kwargs):
 
     df = kwargs['df']
@@ -142,7 +142,7 @@ def get_features(**kwargs):
 
 Now let't take a look at the columns of the output of get_features:
 
-```
+```python
 import strategy_development.cnn.cnn2.prepare_data as prep
 import pandas as pd
 final_data = prep.prepare_2H_data()
@@ -160,7 +160,7 @@ As you can see we have all the necessary columns in feature_data. However we wil
 
 The authors use a rolling window methodology to train and test the model. Training is done with 2 years of data. The next 4 weeks of data is used for validation and the following 2 weeks are used for testing the strategy. After the results are collected the starting point of each window is moved by 2 weeks after which model estimation and testing restarts again using this new data. The following function in prepare_data.py will generate the necessary indices to access the training, validation and test data for each iteration of the rolling training.
 
-```
+```python
 def prepare_rolling_simulation_indices(**kwargs):
 
     entire_data = kwargs['entire_data']
@@ -185,7 +185,7 @@ def prepare_rolling_simulation_indices(**kwargs):
 
 Let's take a look at the output of this function by printing out the 55th and 56th values of the returned lists.
 
-```
+```python
 i = 55
 print('example case:')
 print('train_start_index: ' + str(train_start_index_list[i]))
@@ -206,7 +206,7 @@ For each training iteration we have train_end_index-train_start_index = 6240 obs
 
 As we have discussed we still have each observation as a 1 dimensional vector and we need to reshape this 1x120 vector into 5x24 matrix. The below function in prepare_data.py accomplishes this:
 
-```
+```python
 def reshape_data(data_input):
 
     return np.reshape(data_input, (data_input.shape[0], 5, 24))
@@ -214,7 +214,7 @@ def reshape_data(data_input):
 
 Let's see the above function in action to make sure it does what it's supposed to do:
 
-```
+```python
 # prep.reshape_data is correctly transofrming data into (num_obs,5,24) shaped matrix
 
 import prepare_data as prep
