@@ -24,7 +24,7 @@ The 1-D kernels (the red and blue one) scan along the x-axis while each one of t
 
 The desired effect of kernels sliding along x-axis can be achieved using Conv2D in combination with kernels with height 1. The tensorflow code for the full model is below:
 
-```
+```python
 conv2d_strides = 1
 kernel_regularizer = 1e-5
 adam_initial_learning_rate = 1e-3
