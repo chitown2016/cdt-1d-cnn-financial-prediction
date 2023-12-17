@@ -270,6 +270,13 @@ I have found that the easiest way to train a tensorflow model in windows is to u
 
 Unfortunately unlike the results presented in the article, for the data I've used the model is not doing a good job in learning any tradable patterns. I've experimented with including more dropout or less dropout layers and batch normalization layers but the results are either overfitting or not learning anything.
 
+## Training Results With Batch_Size=64, 1 Dropout Layer
+
+<p float="left">
+  <img src="/assets/benchmark_learning_curve.JPG" width="500" />
+  <img src="/assets/benchmark_accuracy_curve.JPG" width="500"/> 
+</p>
+
 
 
 
