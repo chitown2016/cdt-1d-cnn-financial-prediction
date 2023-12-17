@@ -295,9 +295,16 @@ The authors have used batch_size=12 so I ran the model with this paramater as we
   <img src="/assets/accuracy_curve_batch_size64_5dropout.JPG" width="500"/> 
 </p>
 
-The authors weren't specific about the locations of the dropout layers so here I put a dropout layer after every convolutional layer and fully connected layer which amounts to 5 dropout layers in total.
+The authors weren't specific about the locations of the dropout layers so here I put a dropout layer after every convolutional layer and fully connected layer which amounts to 5 dropout layers in total. The plots above show that with 5 dropout layers the model has trouble learning anything at all as the training loss remains above the validation loss.
 
+### Training Results With Batch_Size=64, 4 Dropout Layers, 1 Batch Normalization
 
+<p float="left">
+  <img src="/assets/learning_curve_batch_size64_4dropout_1bn.JPG" width="500" />
+  <img src="/assets/accuracy_curve_batch_size64_4dropout_1bn.JPG" width="500"/> 
+</p>
+
+Although the authors have never used batch normalization I've decided to replace one of the dropout layers with a batch normalization layer just to experiment. From the above curves it seems that (4 Dropout, 1 Batch Normalization) model learns a little better than the 5 Dropout model.
 
 
 
