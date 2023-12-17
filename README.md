@@ -306,6 +306,24 @@ The authors weren't specific about the locations of the dropout layers so here I
 
 Although the authors have never used batch normalization I've decided to replace one of the dropout layers with a batch normalization layer just to experiment. From the above curves it seems that (4 Dropout, 1 Batch Normalization) model learns a little better than the 5 Dropout model.
 
+### Training Results With Batch_Size=64, 3 Dropout Layers, 1 Batch Normalization
+
+<p float="left">
+  <img src="/assets/learning_curve_batch_size64_3dropout_1bn.JPG" width="500" />
+  <img src="/assets/accuracy_curve_batch_size64_3dropout_1bn.JPG" width="500"/> 
+</p>
+
+Removing one more layer of dropout layer quickly results in overfitting as can be seen from the above plots.
+
+### Training Results With Batch_Size=64, 3 Dropout Layers, 2 Batch Normalizations
+
+<p float="left">
+  <img src="/assets/learning_curve_batch_size64_3dropout_2bn.JPG" width="500" />
+  <img src="/assets/accuracy_curve_batch_size64_3dropout_2bn.JPG" width="500"/> 
+</p>
+
+Adding second layer of batch normalization to (3 Dropout, 1 Batch Normalization) model lowers the amount of curve fitting but this is not nearly enough to remove the overall curve fitting of the model.
+
 
 
 
