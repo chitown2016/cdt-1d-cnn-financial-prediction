@@ -279,14 +279,23 @@ Unfortunately unlike the results presented in the article, for the data I've use
 
 The plot on the left shows the progress of the loss curve as the training progresses across epochs. Training loss is going down as expected but validation loss is exploding which is a sign of massive overfitting. These results are supported by the plot on the right as for the training dataset the accuracy reaches almost 90% whereas validation accuracy is less than 50%.
 
-## Training Results With Batch_Size=12, 1 Dropout Layer
+### Training Results With Batch_Size=12, 1 Dropout Layer
 
 <p float="left">
   <img src="/assets/learning_curve_batch_size12.JPG" width="500" />
   <img src="/assets/accuracy_curve_batch_size12.JPG" width="500"/> 
 </p>
 
+The authors have used batch_size=12 so I ran the model with this paramater as well but the results are not significantly different. Again massive overfitting can be observed in the above plots.
 
+### Training Results With Batch_Size=64, 5 Dropout Layers
+
+<p float="left">
+  <img src="/assets/learning_curve_batch_size64_5dropout.JPG" width="500" />
+  <img src="/assets/accuracy_curve_batch_size64_5dropout.JPG" width="500"/> 
+</p>
+
+The authors weren't specific about the locations of the dropout layers so here I put a dropout layer after every convolutional layer and fully connected layer which amounts to 5 dropout layers in total.
 
 
 
