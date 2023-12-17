@@ -270,12 +270,23 @@ I have found that the easiest way to train a tensorflow model in windows is to u
 
 Unfortunately unlike the results presented in the article, for the data I've used the model is not doing a good job in learning any tradable patterns. I've experimented with including more dropout or less dropout layers and batch normalization layers but the results are either overfitting or not learning anything. Remember the model is trained every two weeks so for reporting purposes I've averaged the loss and accuracy results across 146 runs for each of the 200 epochs.
 
-## Training Results With Batch_Size=64, 1 Dropout Layer
+### Training Results With Batch_Size=64, 1 Dropout Layer
 
 <p float="left">
   <img src="/assets/benchmark_learning_curve.JPG" width="500" />
   <img src="/assets/benchmark_accuracy_curve.JPG" width="500"/> 
 </p>
+
+The plot on the left shows the progress of the loss curve as the training progresses across epochs. Training loss is going down as expected but validation loss is exploding which is a sign of massive overfitting. These results are supported by the plot on the right as for the training dataset the accuracy reaches almost 90% whereas validation accuracy is less than 50%.
+
+## Training Results With Batch_Size=12, 1 Dropout Layer
+
+<p float="left">
+  <img src="/assets/learning_curve_batch_size12.JPG" width="500" />
+  <img src="/assets/accuracy_curve_batch_size12.JPG" width="500"/> 
+</p>
+
+
 
 
 
