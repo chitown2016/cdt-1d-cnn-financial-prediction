@@ -324,6 +324,10 @@ Removing one more layer of dropout layer quickly results in overfitting as can b
 
 Adding second layer of batch normalization to (3 Dropout, 1 Batch Normalization) model lowers the amount of curve fitting but this is not nearly enough to remove the overall curve fitting of the model.
 
+## Trading Strategy Results
+
+Although the learning algorithm doesn't seem to generalize well according to above results I still report the results of the following trading strategy. The strategy rules are simple and similar to what's suggested by the authors. At any given time we use the most recently trained model to make predictions and if the 
+
 
 
 
