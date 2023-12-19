@@ -268,7 +268,7 @@ I have found that the easiest way to train a tensorflow model in windows is to u
 
 ## Training Results
 
-Unfortunately unlike the results presented in the article, for the data I've used the model is not doing a good job in learning any tradable patterns. I've experimented with including more dropout or less dropout layers and batch normalization layers but the results are either overfitting or not learning anything. Remember the model is trained every two weeks so for reporting purposes I've averaged the loss and accuracy results across 146 runs for each of the 200 epochs.
+The code for fitting the model can be found in [run_cnn.py](run_cnn.py) Unfortunately unlike the results presented in the article, for the data I've used the model is not doing a good job in learning any tradable patterns. I've experimented with including more dropout or less dropout layers and batch normalization layers but the results are either overfitting or not learning anything. Remember the model is trained every two weeks so for reporting purposes I've averaged the loss and accuracy results across 146 runs for each of the 200 epochs.
 
 ### Training Results With Batch_Size=64, 1 Dropout Layer
 
