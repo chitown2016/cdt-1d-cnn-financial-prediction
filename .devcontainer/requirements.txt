@@ -1,0 +1,6 @@
+statsmodels
+mysql-connector-python
+tensorflow_datasets
+ipykernel
+matplotlib
+scikit-learn
