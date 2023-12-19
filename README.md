@@ -326,7 +326,9 @@ Adding second layer of batch normalization to (3 Dropout, 1 Batch Normalization)
 
 ## Trading Strategy Results
 
-Although the learning algorithm doesn't seem to generalize well according to above results I still report the results of the following trading strategy. The strategy rules are simple and similar to what's suggested by the authors. At any given time we use the most recently trained model (trained with batch_size=64, 3 dropout and 2 batch normalization layers) to make predictions for the price movement in the next two hours. In the very beginning the strategy will wait for an up (down) predicting label to enter a long (short) trade. After a trade is entered thw strategy will wait for a signal in the opposing direction in order to exit the current trade and enter a trade in the opposing direction. 
+Although the learning algorithm doesn't seem to generalize well according to above results I still report the results of the following trading strategy. The strategy rules are simple and similar to what's suggested by the authors. At any given time we use the most recently trained model (trained with batch_size=64, 3 dropout and 2 batch normalization layers) to make predictions for the price movement in the next two hours. In the very beginning the strategy will wait for an up (down) predicting label to enter a long (short) trade. After a trade is entered thw strategy will wait for a signal in the opposing direction in order to exit the current trade and enter a trade in the opposing direction.
+
+![](/assets/strategy_performance.png)
 
 
 
