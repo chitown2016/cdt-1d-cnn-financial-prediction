@@ -125,7 +125,7 @@ raw_data.loc[raw_data['percent_diff1']<-0.55*raw_data['std'],'label'] = 0
 raw_data.to_pickle('cnn_data.pkl')
 ```
 
-get_features() function in prepare_data.py helps us extract the features from the raw_data. Below is the implementation.
+get_features() function in [prepare_data.py](prepare_data.py) helps us extract the features from the raw_data. Below is the implementation.
 
 ```python
 def get_features(**kwargs):
@@ -158,7 +158,7 @@ As you can see we have all the necessary columns in feature_data. However we wil
 
 ### Calculating Indices for Rolling Window Training
 
-The authors use a rolling window methodology to train and test the model. Training is done with 2 years of data. The next 4 weeks of data is used for validation and the following 2 weeks are used for testing the strategy. After the results are collected the starting point of each window is moved by 2 weeks after which model estimation and testing restarts again using this new data. The following function in prepare_data.py will generate the necessary indices to access the training, validation and test data for each iteration of the rolling training.
+The authors use a rolling window methodology to train and test the model. Training is done with 2 years of data. The next 4 weeks of data is used for validation and the following 2 weeks are used for testing the strategy. After the results are collected the starting point of each window is moved by 2 weeks after which model estimation and testing restarts again using this new data. The following function in [prepare_data.py](prepare_data.py) will generate the necessary indices to access the training, validation and test data for each iteration of the rolling training.
 
 ```python
 def prepare_rolling_simulation_indices(**kwargs):
@@ -204,7 +204,7 @@ For each training iteration we have train_end_index-train_start_index = 6240 obs
 
 ### Reshaping the Feature Data into Feature Matrix
 
-As we have discussed we still have each observation as a 1 dimensional vector and we need to reshape this 1x120 vector into 5x24 matrix. The below function in prepare_data.py accomplishes this:
+As we have discussed we still have each observation as a 1 dimensional vector and we need to reshape this 1x120 vector into 5x24 matrix. The below function in [prepare_data.py](prepare_data.py) accomplishes this:
 
 ```python
 def reshape_data(data_input):
