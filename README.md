@@ -274,7 +274,7 @@ The code for fitting the model can be found in [run_cnn.py](run_cnn.py) Unfortun
 
 <p float="left">
   <img src="assets/benchmark_learning_curve.JPG" width="500" />
-  <img src="/assets/benchmark_accuracy_curve.JPG" width="500"/> 
+  <img src="assets/benchmark_accuracy_curve.JPG" width="500"/> 
 </p>
 
 The plot on the left shows the progress of the loss curve as the training progresses across epochs. Training loss is going down as expected but validation loss is exploding which is a sign of massive overfitting. These results are supported by the plot on the right as for the training dataset the accuracy reaches almost 90% whereas validation accuracy is less than 50%.
@@ -282,8 +282,8 @@ The plot on the left shows the progress of the loss curve as the training progre
 ### Training Results With Batch_Size=12, 1 Dropout Layer
 
 <p float="left">
-  <img src="/assets/learning_curve_batch_size12.JPG" width="500" />
-  <img src="/assets/accuracy_curve_batch_size12.JPG" width="500"/> 
+  <img src="assets/learning_curve_batch_size12.JPG" width="500" />
+  <img src="assets/accuracy_curve_batch_size12.JPG" width="500"/> 
 </p>
 
 The authors have used batch_size=12 so I ran the model with this paramater as well but the results are not significantly different. Again massive overfitting can be observed in the above plots.
@@ -291,8 +291,8 @@ The authors have used batch_size=12 so I ran the model with this paramater as we
 ### Training Results With Batch_Size=64, 5 Dropout Layers
 
 <p float="left">
-  <img src="/assets/learning_curve_batch_size64_5dropout.JPG" width="500" />
-  <img src="/assets/accuracy_curve_batch_size64_5dropout.JPG" width="500"/> 
+  <img src="assets/learning_curve_batch_size64_5dropout.JPG" width="500" />
+  <img src="assets/accuracy_curve_batch_size64_5dropout.JPG" width="500"/> 
 </p>
 
 The authors weren't specific about the locations of the dropout layers so here I put a dropout layer after every convolutional layer and fully connected layer which amounts to 5 dropout layers in total. The plots above show that with 5 dropout layers the model has trouble learning anything at all as the training loss remains above the validation loss.
@@ -300,8 +300,8 @@ The authors weren't specific about the locations of the dropout layers so here I
 ### Training Results With Batch_Size=64, 4 Dropout Layers, 1 Batch Normalization
 
 <p float="left">
-  <img src="/assets/learning_curve_batch_size64_4dropout_1bn.JPG" width="500" />
-  <img src="/assets/accuracy_curve_batch_size64_4dropout_1bn.JPG" width="500"/> 
+  <img src="assets/learning_curve_batch_size64_4dropout_1bn.JPG" width="500" />
+  <img src="assets/accuracy_curve_batch_size64_4dropout_1bn.JPG" width="500"/> 
 </p>
 
 Although the authors have never used batch normalization I've decided to replace one of the dropout layers with a batch normalization layer just to experiment. From the above curves it seems that (4 Dropout, 1 Batch Normalization) model learns a little better than the 5 Dropout model.
@@ -309,8 +309,8 @@ Although the authors have never used batch normalization I've decided to replace
 ### Training Results With Batch_Size=64, 3 Dropout Layers, 1 Batch Normalization
 
 <p float="left">
-  <img src="/assets/learning_curve_batch_size64_3dropout_1bn.JPG" width="500" />
-  <img src="/assets/accuracy_curve_batch_size64_3dropout_1bn.JPG" width="500"/> 
+  <img src="assets/learning_curve_batch_size64_3dropout_1bn.JPG" width="500" />
+  <img src="assets/accuracy_curve_batch_size64_3dropout_1bn.JPG" width="500"/> 
 </p>
 
 Removing one more layer of dropout layer quickly results in overfitting as can be seen from the above plots.
@@ -318,8 +318,8 @@ Removing one more layer of dropout layer quickly results in overfitting as can b
 ### Training Results With Batch_Size=64, 3 Dropout Layers, 2 Batch Normalizations
 
 <p float="left">
-  <img src="/assets/learning_curve_batch_size64_3dropout_2bn.JPG" width="500" />
-  <img src="/assets/accuracy_curve_batch_size64_3dropout_2bn.JPG" width="500"/> 
+  <img src="assets/learning_curve_batch_size64_3dropout_2bn.JPG" width="500" />
+  <img src="assets/accuracy_curve_batch_size64_3dropout_2bn.JPG" width="500"/> 
 </p>
 
 Adding second layer of batch normalization to (3 Dropout, 1 Batch Normalization) model lowers the amount of curve fitting but this is not nearly enough to remove the overall curve fitting of the model.
