@@ -273,7 +273,7 @@ The code for fitting the model can be found in [run_cnn.py](run_cnn.py) Unfortun
 ### Training Results With Batch_Size=64, 1 Dropout Layer
 
 <p float="left">
-  <img src="/assets/benchmark_learning_curve.JPG" width="500" />
+  <img src="assets/benchmark_learning_curve.JPG" width="500" />
   <img src="/assets/benchmark_accuracy_curve.JPG" width="500"/> 
 </p>
 
