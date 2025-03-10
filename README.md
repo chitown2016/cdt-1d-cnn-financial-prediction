@@ -106,7 +106,7 @@ data_2H['percent_diff'] = data_2H['close'].diff()/data_2H['close'].shift(1)
 data_2H['std'] = data_2H['percent_diff'].rolling(10).std()
 data_2H['percent_diff1'] = data_2H['percent_diff'].shift(-1)
 ```
-We do the above prodecure for each individual expiry and below we combine this data and drop the duplicates as we only want one observation for each datetime. We calculate the label using the future 2H return and past standard deviation. Label will be 1 for returns higher than a threshold level and 0 for returns lower than a threshold level and 1 for the rest of the observations.
+We do the above prodecure for each individual expiry and below we combine this data and drop the duplicates as we only want one observation for each datetime. We calculate the label using the future 2H return and past standard deviation. Label will be 2 for returns higher than a threshold level and 0 for returns lower than a threshold level and 1 for the rest of the observations.
 
 ```python
 data_list.append(data_2H)
