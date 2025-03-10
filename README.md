@@ -75,7 +75,7 @@ Convolutional layers are followed by two fully connected layers with 1000 and 50
 
 ### Collecting Features
 
-Dealing with futures data is a little more complicated than stock data in general. Especially when calculating returns just using a rolling contract data will lead to wrong results because of price jumps during the contract rolls. To avoid this I've used expired contract data to calculate features and label and then stitched the data together based on which contract is more liquid on a given date. All the code related to data processing can be found in [prepare_data.py](prepare_data.py) and [test_data_prep notebook](test_data_prep.ipynb) procides a more in depth look into the data processing steps.
+Dealing with futures data is a little more complicated than stock data in general. Especially when calculating returns just using a rolling contract data will lead to wrong results because of price jumps during the contract rolls. To avoid this I've used expired contract data to calculate features and label and then stitched the data together based on which contract is more liquid on a given date. All the code related to data processing can be found in [prepare_data.py](prepare_data.py) and [test_data_prep notebook](test_data_prep.ipynb) provides a more in depth look into the data processing steps.
 
 For the [prepare_data.py](prepare_data.py) function to work you will need 5M data already stored in your hard-drive and you will need a function to return it as a pandas dataframe for a given ticker. For example:
 
